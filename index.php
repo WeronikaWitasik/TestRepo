@@ -17,13 +17,13 @@ interface Example {
     public function wakeUp();
     public function goSleep();
 }
-class Human implements Example {
+class Slave implements Example {
     public function wakeUp() {
 
-    };
+    }
     public function goSleep() {
 
-    };
+    }
 }
 var_dump(new Student());
 ?>
