@@ -1,31 +1,28 @@
 <!DOCTYPE html>
 <html>
-<head></head>
+<head>
+    <link rel="stylesheet" type="project_1/html" href="project_1.html">;
+    <link rel="stylesheet" type="layout/css" href="layout.css">;
+</head>
 <body>
 <?php
-abstract class Human {
-    private $age;
-    private $name;
-}
-final class Teacher extends Human {
-    private $subject;
-}
-final class Student extends Human {
-    private $grade;
-}
-interface Example {
-    public function wakeUp();
-    public function goSleep();
-}
-class Slave implements Example {
-    public function wakeUp() {
 
-    }
-    public function goSleep() {
+/*define('DB_SERVER', 'localhost');
+define('DB_USERNAME', 'weronika');
+define('DB_PASSWORD', '');
+define('DB_NAME', 'login');*/
+////$link = mysql_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
 
-    }
+$username = 'nazwa użytkownika';
+$password = 'hasło';
+$database = 'localhost';
+
+$connection = @mysqli_connect('localhost', $username, $password);
+
+if($connection === false){
+    die("ERROR: Could not connect. " . mysqli_connect_error());
 }
-var_dump(new Student());
+
 ?>
 </body>
 </html>
