@@ -19,7 +19,7 @@ if (isset($_POST['submit'])) {
         $result = mysqli_query($conn, $sql);
         $resultCheck = mysqli_num_rows($result);
         if ($resultCheck < 1) {
-            header("Location: ../index.php?login=error");
+            header("Location: ../index.php?login=error1");
             exit();
         } else {
             if ($row = mysqli_fetch_assoc($result)) {
@@ -27,7 +27,7 @@ if (isset($_POST['submit'])) {
                     //De-hashing the pwd
                     $hashedPwdCheck = password_verify($pwd, $row['user_pwd']);
                     if ($hashedPwdCheck == false) {
-                        header("Location: ../index.php?login=error");
+                        header("Location: ../index.php?login=error2");
                         exit();
                     }elseif ($hashedPwdCheck == true){
                          //Log in the user here
@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
                 }
             }
         }else {
-    header("Location: ../index.php?login=error");
+    header("Location: ../index.php?login=error3");
     exit();
 }
 ?>
