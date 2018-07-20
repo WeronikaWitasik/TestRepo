@@ -1,6 +1,9 @@
 <?php
 
 session_start();
+function checkPassword(string $pwd, string $userPwd) {
+    return $pwd == $userPwd;
+}
 
 if (isset($_POST['submit'])) {
 
@@ -25,25 +28,27 @@ if (isset($_POST['submit'])) {
             if ($row = mysqli_fetch_assoc($result)) {
                 echo $row['user_uid'];
                     //De-hashing the pwd
-                    $hashedPwdCheck = password_verify($pwd, $row['user_pwd']);
-                    if ($hashedPwdCheck == false) {
+                    $hashedPwdCheck = checkPassword($pwd, $row['user_pwd']);
+
+                    if($hashedPwdCheck) {
+                        //Log in the user here
+                           $_SESSION['u_id'] = $row['user_id'];
+                           $_SESSION['u_first'] = $row['user_first'];
+                           $_SESSION['u_last'] = $row['user_last'];
+                           $_SESSION['u_email'] = $row['user_email'];
+                           $_SESSION['u_uid'] = $row['user_uid'];
+                       header("Location: ../index.php?login=success");
+                       exit();
+                    } else {
                         header("Location: ../index.php?login=error2");
                         exit();
-                    }elseif ($hashedPwdCheck == true){
-                         //Log in the user here
-                            $_SESSION['u_id'] = $row['user_id'];
-                            $_SESSION['u_first'] = $row['user_first'];
-                            $_SESSION['u_last'] = $row['user_last'];
-                            $_SESSION['u_email'] = $row['user_email'];
-                            $_SESSION['u_uid'] = $row['user_uid'];
-                        header("Location: ../index.php?login=success");
-                        exit();
-                        }
                     }
                 }
             }
-        }else {
-    header("Location: ../index.php?login=error3");
-    exit();
-}
+        }
+    } else {
+        header("Location: ../index.php?login=error3");
+        exit();
+    }
+
 ?>
